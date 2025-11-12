@@ -1,0 +1,307 @@
+[
+  {
+    "id": "509e2656-ac87-45e2-b0bc-1a7607be03bd",
+    "user_name": "Frederik",
+    "box_id": "BOX-01",
+    "device_id": "fa484e48-7224-4323-bc7a-2b0c05263927",
+    "extra_device_ids": [],
+    "access_code": "1579",
+    "seam_access_code_id": null,
+    "extra_seam_access_code_ids": [],
+    "created_at": "2025-11-07T12:12:44.768963",
+    "valid_until": "2025-11-07T12:14:44.768963",
+    "user_id": null,
+    "pricing_mode": null,
+    "unit_label": null,
+    "billed_units": null,
+    "price_for_period": null
+  },
+  {
+    "id": "b5199d7c-f83a-4107-950a-091e2b5192c0",
+    "user_name": "Frederik",
+    "box_id": "BOX-01",
+    "device_id": "fa484e48-7224-4323-bc7a-2b0c05263927",
+    "extra_device_ids": [],
+    "access_code": "5274",
+    "seam_access_code_id": null,
+    "extra_seam_access_code_ids": [],
+    "created_at": "2025-11-07T12:36:55.127276",
+    "valid_until": "2025-11-07T13:46:55.127276",
+    "user_id": null,
+    "pricing_mode": null,
+    "unit_label": null,
+    "billed_units": null,
+    "price_for_period": null
+  },
+  {
+    "id": "1860831b-ff91-492e-8729-b631d9e3cf60",
+    "user_name": "admin@example.com",
+    "box_id": "BOX-01",
+    "device_id": "fa484e48-7224-4323-bc7a-2b0c05263927",
+    "extra_device_ids": [],
+    "access_code": "4291",
+    "seam_access_code_id": null,
+    "extra_seam_access_code_ids": [],
+    "created_at": "2025-11-07T14:44:04.463215",
+    "valid_until": "2025-11-07T15:04:04.463215",
+    "user_id": null,
+    "pricing_mode": null,
+    "unit_label": null,
+    "billed_units": null,
+    "price_for_period": null
+  },
+  {
+    "id": "0b924944-6347-401c-9777-88de0731fe99",
+    "user_name": "kunde1@example.com",
+    "box_id": "BOX-01",
+    "device_id": "fa484e48-7224-4323-bc7a-2b0c05263927",
+    "extra_device_ids": [],
+    "access_code": "1404",
+    "seam_access_code_id": null,
+    "extra_seam_access_code_ids": [],
+    "created_at": "2025-11-07T16:11:24.089899",
+    "valid_until": "2025-11-07T16:21:24.089899",
+    "user_id": "aa67ad37-8ef1-47c6-906c-ca019cc22d94",
+    "pricing_mode": null,
+    "unit_label": null,
+    "billed_units": null,
+    "price_for_period": null
+  },
+  {
+    "id": "b542fbe7-5448-41b2-b139-13210b4d4f63",
+    "user_name": "Frederik",
+    "box_id": "LOCKER-01",
+    "device_id": "fa484e48-7224-4323-bc7a-2b0c05263927",
+    "extra_device_ids": [],
+    "access_code": "4044",
+    "seam_access_code_id": null,
+    "extra_seam_access_code_ids": [],
+    "created_at": "2025-11-07T18:16:40.986363",
+    "valid_until": "2025-11-07T19:16:40.986363",
+    "user_id": "fd7c3808-6bb9-4520-84ff-772c05aa2029",
+    "pricing_mode": "hourly",
+    "unit_label": "hour",
+    "billed_units": 1,
+    "price_for_period": 0.5
+  },
+  {
+    "id": "ec3e40d3-0362-4d21-ab71-5dd04e0bbcff",
+    "user_name": "fredi@fredi.com",
+    "box_id": "BOX-10",
+    "device_id": "da6541d7-beac-4735-bc2e-de8af3f7665f",
+    "extra_device_ids": [
+      "fa484e48-7224-4323-bc7a-2b0c05263927",
+      "ff56794a-f145-4aae-a604-c8a447507909"
+    ],
+    "access_code": "9746",
+    "seam_access_code_id": "7cb9e0c6-e6e5-4b14-b881-976adb8a4901",
+    "extra_seam_access_code_ids": [
+      "ee7e8336-1b2d-413f-bbee-8b2e1e1893fd",
+      "829e7a63-3d7c-4a14-9c0f-916430b19c20"
+    ],
+    "created_at": "2025-11-10T15:45:12.035878",
+    "valid_until": "2025-11-10T16:45:12.035878",
+    "user_id": null,
+    "pricing_mode": "daily",
+    "unit_label": "day",
+    "billed_units": 1,
+    "price_for_period": 71.25
+  },
+  {
+    "id": "ffff8c95-84c6-46e2-802a-bb8477ee198b",
+    "user_name": "Demo-Kunde",
+    "box_id": "LOCKER-01",
+    "device_id": "fa484e48-7224-4323-bc7a-2b0c05263927",
+    "extra_device_ids": [
+      "ff56794a-f145-4aae-a604-c8a447507909"
+    ],
+    "access_code": "1994",
+    "seam_access_code_id": "62ea87da-6416-4247-80ec-5004db1e3893",
+    "extra_seam_access_code_ids": [
+      "3c6400eb-89fd-4e86-af4d-b2fb379fc5cd"
+    ],
+    "created_at": "2025-11-11T07:26:20.332836",
+    "valid_until": "2025-11-11T08:26:20.332836",
+    "user_id": null,
+    "pricing_mode": "hourly",
+    "unit_label": "hour",
+    "billed_units": 1,
+    "price_for_period": 0.5
+  },
+  {
+    "id": "e05fc336-8bed-470b-a02d-e299b0e06caa",
+    "user_name": "Demo-Kunde",
+    "box_id": "BOX-10",
+    "device_id": "da6541d7-beac-4735-bc2e-de8af3f7665f",
+    "extra_device_ids": [
+      "fa484e48-7224-4323-bc7a-2b0c05263927",
+      "ff56794a-f145-4aae-a604-c8a447507909"
+    ],
+    "access_code": "5139",
+    "seam_access_code_id": "4242eeeb-c4f4-4d79-8b79-4b19e573093e",
+    "extra_seam_access_code_ids": [
+      "5853f88a-493d-4c07-b13b-eb51b215649f",
+      "7a1e1aef-5e07-439f-8c9f-73362a758050"
+    ],
+    "created_at": "2025-11-11T07:29:35.400357",
+    "valid_until": "2025-11-12T07:29:35.400357",
+    "user_id": null,
+    "pricing_mode": "daily",
+    "unit_label": "day",
+    "billed_units": 1,
+    "price_for_period": 71.25
+  },
+  {
+    "id": "d59f2c22-fdf2-4755-9f8d-4671392de514",
+    "user_name": "Demo-Kunde",
+    "box_id": "LOCKER-01",
+    "device_id": "fa484e48-7224-4323-bc7a-2b0c05263927",
+    "extra_device_ids": [
+      "ff56794a-f145-4aae-a604-c8a447507909"
+    ],
+    "access_code": "7292",
+    "seam_access_code_id": "a5d8d9e5-af51-4089-81fc-058e28f90847",
+    "extra_seam_access_code_ids": [
+      "d07e7f42-09d0-43c6-9683-a1bea27eeb19"
+    ],
+    "created_at": "2025-11-11T08:28:36.488447",
+    "valid_until": "2025-11-11T09:28:36.488447",
+    "user_id": "fd7c3808-6bb9-4520-84ff-772c05aa2029",
+    "pricing_mode": "hourly",
+    "unit_label": "hour",
+    "billed_units": 1,
+    "price_for_period": 0.5
+  },
+  {
+    "id": "d8f97c26-a824-4344-8049-7c11e8e1b393",
+    "user_name": "Demo-Kunde",
+    "box_id": "43534553",
+    "device_id": "23434523",
+    "extra_device_ids": [
+      "fa484e48-7224-4323-bc7a-2b0c05263927",
+      "ff56794a-f145-4aae-a604-c8a447507909"
+    ],
+    "access_code": "2561",
+    "seam_access_code_id": "0f283897-6f5e-45a1-96b1-442ce66e850f",
+    "extra_seam_access_code_ids": [
+      "64669438-11da-4193-b0d2-54d28386733f"
+    ],
+    "created_at": "2025-11-11T08:47:13.361174",
+    "valid_until": "2025-11-12T08:47:13.361174",
+    "user_id": "fd7c3808-6bb9-4520-84ff-772c05aa2029",
+    "pricing_mode": "daily",
+    "unit_label": "day",
+    "billed_units": 1,
+    "price_for_period": 71.25
+  },
+  {
+    "id": "d09fb25c-0362-4897-9175-82543b354016",
+    "user_name": "Frontend-Kunde",
+    "box_id": "LOCKER-01",
+    "device_id": "dev-locker-01",
+    "extra_device_ids": [
+      "fa484e48-7224-4323-bc7a-2b0c05263927",
+      "ff56794a-f145-4aae-a604-c8a447507909"
+    ],
+    "access_code": "7968",
+    "seam_access_code_id": "f29e6e8d-7a68-4871-85f6-e50ac1b2ff41",
+    "extra_seam_access_code_ids": [
+      "5117f093-fda6-481c-a9b4-514ad148647e"
+    ],
+    "created_at": "2025-11-11T11:00:45.458820",
+    "valid_until": "2025-11-11T12:00:45.458820",
+    "user_id": "fd7c3808-6bb9-4520-84ff-772c05aa2029",
+    "pricing_mode": "daily",
+    "unit_label": "day",
+    "billed_units": 1,
+    "price_for_period": 8.0
+  },
+  {
+    "id": "e48edda0-a962-40af-a4bc-0bfba52e475e",
+    "user_name": "Frontend-Kunde",
+    "box_id": "BOX-03",
+    "device_id": "dev-box-03",
+    "extra_device_ids": [
+      "fa484e48-7224-4323-bc7a-2b0c05263927",
+      "ff56794a-f145-4aae-a604-c8a447507909"
+    ],
+    "access_code": "1008",
+    "seam_access_code_id": "410f6960-83e4-494c-95fe-db40347916f8",
+    "extra_seam_access_code_ids": [
+      "f177586b-0453-4109-bf8c-af28001835a7"
+    ],
+    "created_at": "2025-11-11T11:01:31.891509",
+    "valid_until": "2025-11-12T11:01:31.891509",
+    "user_id": "fd7c3808-6bb9-4520-84ff-772c05aa2029",
+    "pricing_mode": "daily",
+    "unit_label": "day",
+    "billed_units": 1,
+    "price_for_period": 48.0
+  },
+  {
+    "id": "a19cb1b8-48e2-43ab-b5cc-032b96d06350",
+    "user_name": "Frontend-Kunde",
+    "box_id": "LOCKER-02",
+    "device_id": "dev-locker-02",
+    "extra_device_ids": [
+      "fa484e48-7224-4323-bc7a-2b0c05263927",
+      "ff56794a-f145-4aae-a604-c8a447507909"
+    ],
+    "access_code": "6146",
+    "seam_access_code_id": "1b6b1d2a-6b99-4ad5-bf6d-9defee4438db",
+    "extra_seam_access_code_ids": [
+      "a77a8255-a613-46da-8929-52642d6c0e5e"
+    ],
+    "created_at": "2025-11-11T11:18:03.866655",
+    "valid_until": "2025-11-11T12:18:03.866655",
+    "user_id": "fd7c3808-6bb9-4520-84ff-772c05aa2029",
+    "pricing_mode": "daily",
+    "unit_label": "day",
+    "billed_units": 1,
+    "price_for_period": 8.0
+  },
+  {
+    "id": "0b36eb76-6ad0-4db9-aa6d-44b720422c60",
+    "user_name": "Frontend-Kunde",
+    "box_id": "LOCKER-03",
+    "device_id": "dev-locker-03",
+    "extra_device_ids": [
+      "fa484e48-7224-4323-bc7a-2b0c05263927",
+      "ff56794a-f145-4aae-a604-c8a447507909"
+    ],
+    "access_code": "2766",
+    "seam_access_code_id": "45ecef79-cbed-449e-bea8-630b980a8628",
+    "extra_seam_access_code_ids": [
+      "e0f305f2-5870-4280-aa33-2bfc11332f23"
+    ],
+    "created_at": "2025-11-11T11:20:13.236638",
+    "valid_until": "2025-11-11T12:20:13.236638",
+    "user_id": "c322eebb-c7ce-45e5-b5a6-d466f515a19c",
+    "pricing_mode": "daily",
+    "unit_label": "day",
+    "billed_units": 1,
+    "price_for_period": 8.0
+  },
+  {
+    "id": "d5e6212c-4087-412b-b6d9-c30d6152f1cc",
+    "user_name": "Frontend-Kunde",
+    "box_id": "LOCKER-01",
+    "device_id": "dev-locker-01",
+    "extra_device_ids": [
+      "fa484e48-7224-4323-bc7a-2b0c05263927",
+      "ff56794a-f145-4aae-a604-c8a447507909"
+    ],
+    "access_code": "7726",
+    "seam_access_code_id": "67f5571b-93b8-442d-86d9-96e2810f4144",
+    "extra_seam_access_code_ids": [
+      "bf1fbae0-d5eb-4541-b9d5-434d72cee171"
+    ],
+    "created_at": "2025-11-11T18:33:15.153402",
+    "valid_until": "2025-11-11T19:33:15.153402",
+    "user_id": "fd7c3808-6bb9-4520-84ff-772c05aa2029",
+    "pricing_mode": "daily",
+    "unit_label": "day",
+    "billed_units": 1,
+    "price_for_period": 8.0
+  }
+]

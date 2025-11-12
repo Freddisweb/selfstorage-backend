@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../selfstorage-backend"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": ".."
+		}
+	],
+	"settings": {}
+}

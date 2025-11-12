@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# Envs
+venv/
+.venv/
+
+# OS / Editor
+.DS_Store
+.vscode/
+.idea/
+
+# Logs & Runtime
+*.log
+logs/
+app/data/logs/
+
+# Node/Frontend (falls im Monorepo)
+node_modules/

@@ -1,0 +1,122 @@
+[
+  {
+    "id": "LOCKER-01",
+    "name": "Kleines Schließfach 1",
+    "size_m2": 1.0,
+    "device_id": "dev-locker-01",
+    "allow_hourly": true,
+    "allow_daily": false,
+    "allow_monthly": false,
+    "price_per_hour": 0.5,
+    "price_per_day": null,
+    "price_per_31days": null
+  },
+  {
+    "id": "LOCKER-02",
+    "name": "Kleines Schließfach 2",
+    "size_m2": 1.0,
+    "device_id": "dev-locker-02",
+    "allow_hourly": true,
+    "allow_daily": false,
+    "allow_monthly": false,
+    "price_per_hour": 0.6,
+    "price_per_day": null,
+    "price_per_31days": null
+  },
+  {
+    "id": "LOCKER-03",
+    "name": "Kleines Schließfach 3",
+    "size_m2": 1.0,
+    "device_id": "dev-locker-03",
+    "allow_hourly": true,
+    "allow_daily": false,
+    "allow_monthly": false,
+    "price_per_hour": 0.7,
+    "price_per_day": null,
+    "price_per_31days": null
+  },
+  {
+    "id": "BOX-01",
+    "name": "Standard Box 1",
+    "size_m2": 5.0,
+    "device_id": "dev-box-01",
+    "allow_hourly": false,
+    "allow_daily": true,
+    "allow_monthly": true,
+    "price_per_hour": null,
+    "price_per_day": 25.0,
+    "price_per_31days": 650.0
+  },
+  {
+    "id": "BOX-02",
+    "name": "Standard Box 2",
+    "size_m2": 5.0,
+    "device_id": "dev-box-02",
+    "allow_hourly": false,
+    "allow_daily": true,
+    "allow_monthly": true,
+    "price_per_hour": null,
+    "price_per_day": 28.0,
+    "price_per_31days": 720.0
+  },
+  {
+    "id": "BOX-03",
+    "name": "Standard Box 3",
+    "size_m2": 6.0,
+    "device_id": "dev-box-03",
+    "allow_hourly": false,
+    "allow_daily": true,
+    "allow_monthly": true,
+    "price_per_hour": null,
+    "price_per_day": 30.0,
+    "price_per_31days": 780.0
+  },
+  {
+    "id": "BOX-04",
+    "name": "Große Box 1",
+    "size_m2": 10.0,
+    "device_id": "dev-box-04",
+    "allow_hourly": false,
+    "allow_daily": true,
+    "allow_monthly": true,
+    "price_per_hour": null,
+    "price_per_day": 45.0,
+    "price_per_31days": 1150.0
+  },
+  {
+    "id": "BOX-05",
+    "name": "Große Box 2",
+    "size_m2": 10.0,
+    "device_id": "dev-box-05",
+    "allow_hourly": false,
+    "allow_daily": true,
+    "allow_monthly": true,
+    "price_per_hour": null,
+    "price_per_day": 48.0,
+    "price_per_31days": 1220.0
+  },
+  {
+    "id": "BOX-06",
+    "name": "Premium Box 1",
+    "size_m2": 15.0,
+    "device_id": "dev-box-06",
+    "allow_hourly": false,
+    "allow_daily": true,
+    "allow_monthly": true,
+    "price_per_hour": null,
+    "price_per_day": 70.0,
+    "price_per_31days": 1780.0
+  },
+  {
+    "id": "BOX-07",
+    "name": "Premium Box 2",
+    "size_m2": 15.0,
+    "device_id": "dev-box-07",
+    "allow_hourly": false,
+    "allow_daily": true,
+    "allow_monthly": true,
+    "price_per_hour": null,
+    "price_per_day": 72.0,
+    "price_per_31days": 1850.0
+  }
+]

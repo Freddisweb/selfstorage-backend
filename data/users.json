@@ -1,0 +1,47 @@
+[
+  {
+    "id": "68522ff3-1309-4b69-bf91-693a5da54560",
+    "email": "admin@example.com",
+    "full_name": "Admin User",
+    "hashed_password": "52d5bec585e74c969fb9f2f4077384ca40484f886fcf02dae5a8cf8ac56f80a8",
+    "is_active": true,
+    "is_admin": true,
+    "created_at": "2025-11-07T13:57:04.463344"
+  },
+  {
+    "id": "aa67ad37-8ef1-47c6-906c-ca019cc22d94",
+    "email": "kunde1@example.com",
+    "full_name": "Kunde Eins",
+    "hashed_password": "cab844c1c004f926c4df05ea429a490a7183a636f200371f13c8f1360e13aa54",
+    "is_active": true,
+    "is_admin": false,
+    "created_at": "2025-11-07T15:45:24.532424"
+  },
+  {
+    "id": "bc7d0715-f3a4-4c64-91b4-b4c9df20e06b",
+    "email": "kunde2@example.com",
+    "full_name": "Kunde Zwei",
+    "hashed_password": "cab844c1c004f926c4df05ea429a490a7183a636f200371f13c8f1360e13aa54",
+    "is_active": true,
+    "is_admin": false,
+    "created_at": "2025-11-07T15:48:20.434391"
+  },
+  {
+    "id": "fd7c3808-6bb9-4520-84ff-772c05aa2029",
+    "email": "fredi@fredi.com",
+    "full_name": "fredi",
+    "hashed_password": "4d6706896887d5da97d75fcb37c7f1b946e8d8fd7ce9cc86ab499cbfbe5d85df",
+    "is_active": true,
+    "is_admin": false,
+    "created_at": "2025-11-07T16:29:13.611457"
+  },
+  {
+    "id": "c322eebb-c7ce-45e5-b5a6-d466f515a19c",
+    "email": "admin@admin.com",
+    "full_name": "admin",
+    "hashed_password": "ebdb74bbbd9d8097208a24d4253f8acab9a71de8c75b4a8e1d76915d9aaa227f",
+    "is_active": true,
+    "is_admin": true,
+    "created_at": "2025-11-07T16:33:17.619896"
+  }
+]
