@@ -56,21 +56,20 @@ export default function LandingPage({
         </div>
       </header>
 
-      {/* Inhalt mit Bild + Overlay-Button */}
+      {/* Inhalt mit Background + Button */}
       <main className="flex-1 flex flex-col items-center px-4 pb-14">
-        <Card className="relative w-full max-w-5xl overflow-hidden bg-black rounded-2xl shadow-2xl">
-          {/* Bild (unterste Ebene) */}
-          <img
-            src={storageImage}
-            alt="Moderner Selfstorage-Gang"
-            className="block w-full h-[420px] sm:h-[520px] object-cover z-0"
+        <Card className="relative isolate w-full max-w-5xl overflow-hidden rounded-2xl shadow-2xl">
+          {/* Hintergrundbild */}
+          <div
+            className="pointer-events-none absolute inset-0 bg-center bg-cover z-0"
+            style={{ backgroundImage: `url(${storageImage})` }}
           />
 
-          {/* Abdunkelungs-Layer */}
-          <div className="absolute inset-0 bg-black/25 z-10" />
+          {/* Abdunkelung */}
+          <div className="pointer-events-none absolute inset-0 bg-black/25 z-10" />
 
-          {/* Button ganz oben */}
-          <div className="absolute inset-0 z-20 flex items-center justify-center">
+          {/* Button zentriert */}
+          <div className="relative z-50 flex items-center justify-center h-[420px] sm:h-[520px]">
             <button
               type="button"
               onClick={onGoToFloorplan}
@@ -84,7 +83,6 @@ export default function LandingPage({
                 ring-4 ring-white/40 hover:ring-white/60
                 hover:bg-[#1e4fcc] hover:scale-110
                 transition-all duration-200
-                z-[9999]
               "
             >
               Jetzt buchen!
