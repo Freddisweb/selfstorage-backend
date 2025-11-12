@@ -1,4 +1,3 @@
-// src/pages/LandingPage.tsx
 import Button from "../components/ui/Button";
 import Card from "../components/ui/Card";
 import storageImage from "../assets/storage.jpg";
@@ -22,7 +21,7 @@ export default function LandingPage({
     <div className="min-h-screen w-full bg-[#f3f3f0] flex flex-col">
       {/* Header */}
       <header className="relative w-full flex items-center justify-center pt-10 pb-6">
-        {/* Brand zentriert, sehr groß, blau und etwas vom oberen Rand abgesetzt */}
+        {/* Brand */}
         <h1 className="mt-2 text-[4rem] sm:text-[5rem] lg:text-[6rem] font-extrabold tracking-[0.35em] uppercase text-[#2563eb] text-center">
           SPACEONE
         </h1>
@@ -59,8 +58,8 @@ export default function LandingPage({
       </header>
 
       {/* Inhalt */}
-      <main className="flex-1 flex flex-col items-center px-4 pb-14">
-        {/* Hero-Bereich: zentriert, nicht full-bleed */}
+      <main className="flex-1 flex flex-col items-center px-4 pb-14 mt-6">
+        {/* Hero-Bereich */}
         <Card className="w-full max-w-5xl overflow-hidden relative bg-black/5">
           <img
             src={storageImage}
@@ -68,15 +67,17 @@ export default function LandingPage({
             className="w-full h-[420px] sm:h-[520px] object-cover"
           />
 
-          {/* „Jetzt buchen!“ mittig auf dem Bild, extra groß */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Button
-              size="xl"
-              onClick={onGoToFloorplan}
-              className="shadow-xl hover:scale-110"
-            >
-              Jetzt buchen!
-            </Button>
+          {/* „Jetzt buchen!“ Button unten im Bild */}
+          <div className="pointer-events-none absolute inset-0 flex items-end justify-center pb-8">
+            <div className="pointer-events-auto">
+              <Button
+                size="xl"
+                onClick={onGoToFloorplan}
+                className="shadow-xl hover:scale-110 text-2xl px-10 py-5"
+              >
+                Jetzt buchen!
+              </Button>
+            </div>
           </div>
         </Card>
       </main>
