@@ -59,31 +59,32 @@ export default function LandingPage({
       {/* Inhalt mit Bild + Overlay-Button */}
       <main className="flex-1 flex flex-col items-center px-4 pb-14">
         <Card className="relative w-full max-w-5xl overflow-hidden bg-black rounded-2xl shadow-2xl">
-          {/* Hintergrundbild */}
+          {/* Bild (unterste Ebene) */}
           <img
             src={storageImage}
-            alt="Moderner Self-Storage-Gang"
-            className="w-full h-[420px] sm:h-[520px] object-cover opacity-95"
+            alt="Moderner Selfstorage-Gang"
+            className="block w-full h-[420px] sm:h-[520px] object-cover z-0"
           />
 
-          {/* leichtes Abdunkelungs-Overlay für bessere Lesbarkeit */}
-          <div className="absolute inset-0 bg-black/25" />
+          {/* Abdunkelungs-Layer */}
+          <div className="absolute inset-0 bg-black/25 z-10" />
 
-          {/* BIG Button zentriert auf dem Bild */}
-          <div className="absolute inset-0 flex items-center justify-center">
+          {/* Button ganz oben */}
+          <div className="absolute inset-0 z-20 flex items-center justify-center">
             <button
               type="button"
               onClick={onGoToFloorplan}
               className="
                 rounded-full bg-[#2563eb] text-white
-                text-2xl sm:text-3xl lg:text-4xl
+                text-3xl sm:text-4xl lg:text-5xl
                 font-semibold tracking-wide
-                px-12 sm:px-16 lg:px-20
-                py-6 sm:py-7 lg:py-8
+                px-16 sm:px-20 lg:px-24
+                py-8 sm:py-10 lg:py-12
                 shadow-[0_20px_40px_rgba(37,99,235,0.45)]
                 ring-4 ring-white/40 hover:ring-white/60
-                hover:bg-[#1e4fcc] hover:scale-105
+                hover:bg-[#1e4fcc] hover:scale-110
                 transition-all duration-200
+                z-[9999]
               "
             >
               Jetzt buchen!
