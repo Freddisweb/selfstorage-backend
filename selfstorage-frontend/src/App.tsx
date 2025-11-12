@@ -25,16 +25,13 @@ function AppShell() {
     setIsLoginOpen(false);
   };
 
-  // „Jetzt buchen“: zur Grundriss-Seite wechseln
   const goToFloorplan = () => navigate("/floorplan");
 
-  // Box gewählt: ggf. Login öffnen, sonst später zu Booking-Details navigieren
   const handleSelectBox = (boxId: string) => {
     if (!isLoggedIn) {
       setIsLoginOpen(true);
       return;
     }
-    // TODO: hier später auf /booking/:boxId routen
     alert(`Hier würden wir jetzt die Buchung für Box ${boxId} starten.`);
   };
 
@@ -46,10 +43,10 @@ function AppShell() {
           element={
             <LandingPage
               isLoggedIn={isLoggedIn}
-              authEmail={authUser?.email ?? null}
+              userEmail={authUser?.email ?? null}
               onOpenLogin={() => setIsLoginOpen(true)}
               onLogout={handleLogout}
-              onClickBookNow={goToFloorplan}
+              onGoToFloorplan={goToFloorplan}
             />
           }
         />

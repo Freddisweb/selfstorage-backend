@@ -31,16 +31,27 @@ export default function LandingPage({
         <div className="absolute right-6 top-6 flex items-center gap-3">
           {isLoggedIn && userEmail && (
             <span className="hidden sm:inline text-xs text-slate-600">
-              Eingeloggt als <span className="font-medium text-slate-900">{userEmail}</span>
+              Eingeloggt als{" "}
+              <span className="font-medium text-slate-900">{userEmail}</span>
             </span>
           )}
 
           {isLoggedIn ? (
-            <Button onClick={onLogout} variant="primary" size="lg" className="bg-black hover:bg-neutral-900">
+            <Button
+              onClick={onLogout}
+              variant="primary"
+              size="lg"
+              className="bg-black hover:bg-neutral-900"
+            >
               Logout
             </Button>
           ) : (
-            <Button onClick={onOpenLogin} variant="primary" size="lg" className="bg-black hover:bg-neutral-900">
+            <Button
+              onClick={onOpenLogin}
+              variant="primary"
+              size="lg"
+              className="bg-black hover:bg-neutral-900"
+            >
               Registrieren / Einloggen
             </Button>
           )}
@@ -60,7 +71,7 @@ export default function LandingPage({
           {/* „Jetzt buchen!“ mittig auf dem Bild, extra groß */}
           <div className="absolute inset-0 flex items-center justify-center">
             <Button
-              size="xl" // 3–5x größer als normal
+              size="xl"
               onClick={onGoToFloorplan}
               className="shadow-xl hover:scale-110"
             >
