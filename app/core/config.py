@@ -1,6 +1,7 @@
 import os
 from dotenv import load_dotenv
 from typing import Optional, List
+from pathlib import Path
 
 # .env-Datei laden
 load_dotenv()
@@ -19,20 +20,36 @@ class Settings:
     JWT_ALGORITHM: str = "HS256"
 
     # --- Laufzeitumgebung ---
-    ENVIRONMENT: str = os.getenv("ENVIRONMENT", "development")  # "development" | "production" | "staging"
+    ENVIRONMENT: str = os.getenv("ENVIRONMENT", "development")
     ACCESS_TOKEN_EXPIRE_MINUTES: int = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", "60"))
 
-    # --- Daten-Dateien ---
-    BOXES_FILE: str = "data/boxes.json"
-    BOOKINGS_FILE: str = "data/bookings.json"
-    USERS_FILE: str = "data/users.json"
+    # --- Persistente Daten ---
+    # Pfad zum Datenverzeichnis (auf Render = /var/data/selfstorage)
+    DATA_DIR: Path = Path(
+        os.getenv("DATA_DIR", Path(__file__).resolve().parents[2] / "data")
+    )
+
+    # Dynamische JSON-Dateipfade
+    @property
+    def BOXES_FILE(self) -> str:
+        return str(self.DATA_DIR / "boxes.json")
+
+    @property
+    def BOOKINGS_FILE(self) -> str:
+        return str(self.DATA_DIR / "bookings.json")
+
+    @property
+    def USERS_FILE(self) -> str:
+        return str(self.DATA_DIR / "users.json")
+
+    @property
+    def SITE_FILE(self) -> str:
+        return str(self.DATA_DIR / "site.json")
 
     # --- CORS ---
     CORS_ORIGINS: List[str] = []
 
     # --- Geräte-Setup ---
-    # Optional: Kommagetrennte Liste von Eingangsschlössern,
-    # die zusätzlich zum Box-Schloss freigeschaltet werden sollen.
     ENTRANCE_DEVICE_IDS: Optional[str] = os.getenv("ENTRANCE_DEVICE_IDS")
 
     def __init__(self) -> None:
@@ -41,15 +58,15 @@ class Settings:
         if origins_raw.strip():
             self.CORS_ORIGINS = [o.strip() for o in origins_raw.split(",")]
         else:
-            # Standardwerte abhängig von ENVIRONMENT
             if self.ENVIRONMENT == "development":
                 self.CORS_ORIGINS = ["*"]
             else:
                 self.CORS_ORIGINS = []
 
-        # Logging-Hinweis (nur für dev hilfreich)
+        # Logging-Hinweis
         print(f"[Settings] Environment: {self.ENVIRONMENT}")
         print(f"[Settings] CORS_ORIGINS: {self.CORS_ORIGINS}")
+        print(f"[Settings] DATA_DIR: {self.DATA_DIR}")
         if self.ENTRANCE_DEVICE_IDS:
             print(f"[Settings] ENTRANCE_DEVICE_IDS: {self.ENTRANCE_DEVICE_IDS}")
         else:
