@@ -1,6 +1,6 @@
 import Button from "../components/ui/Button";
 import Card from "../components/ui/Card";
-import storageImage from "../assets/storage.jpg";
+// import storageImage from "../assets/storage.jpg"; // <— Bild vorerst deaktiviert
 
 type Props = {
   isLoggedIn: boolean;
@@ -18,10 +18,9 @@ export default function LandingPage({
   onGoToFloorplan,
 }: Props) {
   return (
-    <div className="min-h-screen w-full bg-[#f3f3f0] flex flex-col">
+    <div className="min-h-screen w-full bg-gray-100 flex flex-col">
       {/* Header */}
       <header className="relative w-full flex items-center justify-center pt-10 pb-6">
-        {/* Brand */}
         <h1 className="mt-2 text-[4rem] sm:text-[5rem] lg:text-[6rem] font-extrabold tracking-[0.35em] uppercase text-[#2563eb] text-center">
           SPACEONE
         </h1>
@@ -57,28 +56,20 @@ export default function LandingPage({
         </div>
       </header>
 
-      {/* Inhalt */}
-      <main className="flex-1 flex flex-col items-center px-4 pb-14 mt-6">
-        {/* Hero-Bereich */}
-        <Card className="w-full max-w-5xl overflow-hidden relative bg-black/5">
-          <img
-            src={storageImage}
-            alt="Moderner Selfstorage-Gang"
-            className="w-full h-[420px] sm:h-[520px] object-cover"
-          />
+      {/* Inhalt ohne Bild */}
+      <main className="flex-1 flex flex-col items-center justify-center px-4 pb-14">
+        <Card className="w-full max-w-3xl flex flex-col items-center justify-center bg-white rounded-2xl shadow-lg p-10 border border-gray-300">
+          <h2 className="text-3xl font-semibold mb-8 text-gray-800 text-center">
+            Willkommen bei SPACEONE
+          </h2>
 
-          {/* „Jetzt buchen!“ Button unten im Bild */}
-          <div className="pointer-events-none absolute inset-0 flex items-end justify-center pb-8">
-            <div className="pointer-events-auto">
-              <Button
-                size="xl"
-                onClick={onGoToFloorplan}
-                className="shadow-xl hover:scale-110 text-2xl px-10 py-5"
-              >
-                Jetzt buchen!
-              </Button>
-            </div>
-          </div>
+          <Button
+            size="xl"
+            onClick={onGoToFloorplan}
+            className="text-2xl px-10 py-6 font-semibold bg-[#2563eb] hover:bg-[#1e4fcc] text-white shadow-2xl hover:scale-105 transition-transform duration-200"
+          >
+            Jetzt buchen!
+          </Button>
         </Card>
       </main>
     </div>
