@@ -8,8 +8,8 @@ import {
 } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import FloorplanPage from "./pages/FloorplanPage";
-import BookingPage from "./pages/BookingPage";
 import LoginModal from "./components/LoginModal";
+import BookingPage from "./pages/BookingPage";
 
 interface AuthUser {
   email: string;
@@ -18,6 +18,7 @@ interface AuthUser {
 function AppShell() {
   const [authUser, setAuthUser] = useState<AuthUser | null>(null);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
+
   const isLoggedIn = !!authUser || !!localStorage.getItem("access_token");
   const navigate = useNavigate();
 
@@ -32,14 +33,6 @@ function AppShell() {
   };
 
   const goToFloorplan = () => navigate("/floorplan");
-
-  const handleSelectBox = (boxId: string) => {
-    if (!isLoggedIn) {
-      setIsLoginOpen(true);
-      return;
-    }
-    navigate(`/booking/${boxId}`);
-  };
 
   return (
     <>
@@ -56,15 +49,16 @@ function AppShell() {
             />
           }
         />
+
         <Route
           path="/floorplan"
           element={
             <FloorplanPage
               onBackToLanding={() => navigate("/")}
-              onSelectBox={handleSelectBox}
             />
           }
         />
+
         <Route path="/booking/:boxId" element={<BookingPage />} />
       </Routes>
 

@@ -3,13 +3,15 @@ import { useEffect, useState } from "react";
 import Button from "../components/ui/Button";
 import Card from "../components/ui/Card";
 import { getAvailableBoxes, BoxPublic } from "../api";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   onBackToLanding: () => void;
-  onSelectBox: (boxId: string) => void;
 };
 
-export default function FloorplanPage({ onBackToLanding, onSelectBox }: Props) {
+export default function FloorplanPage({ onBackToLanding }: Props) {
+  const navigate = useNavigate();
+
   const [boxes, setBoxes] = useState<BoxPublic[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
@@ -19,11 +21,13 @@ export default function FloorplanPage({ onBackToLanding, onSelectBox }: Props) {
       try {
         setIsLoading(true);
         setErrorMsg(null);
-        // Erstmal: sofortige Buchung, Dauer 60 Min (kannst du später parametrisieren)
+
+        // Beispiel: jetzt + 0 Minuten, Dauer 60 Minuten
         const data = await getAvailableBoxes({
           startInMinutes: 0,
           durationMinutes: 60,
         });
+
         setBoxes(data);
       } catch (err: any) {
         setErrorMsg(
@@ -33,8 +37,21 @@ export default function FloorplanPage({ onBackToLanding, onSelectBox }: Props) {
         setIsLoading(false);
       }
     };
+
     load();
   }, []);
+
+  const handleSelectBox = (boxId: string) => {
+    const token = localStorage.getItem("access_token");
+
+    if (!token) {
+      // Benutzer ist nicht eingeloggt → zurück zur LandingPage
+      alert("Bitte logge dich zuerst ein.");
+      return;
+    }
+
+    navigate(`/booking/${boxId}`);
+  };
 
   return (
     <div className="min-h-screen w-full bg-[#f3f3f0] flex flex-col">
@@ -57,7 +74,7 @@ export default function FloorplanPage({ onBackToLanding, onSelectBox }: Props) {
       <main className="flex-1 flex flex-col items-center px-4 pb-10">
         <Card className="w-full max-w-5xl rounded-3xl shadow-lg p-6 bg-white/90">
           <p className="mb-4 text-sm text-slate-500">
-            Wähle eine Box im Grundriss aus, um mit der Buchung zu starten.
+            Wähle eine Box aus, um deine Buchung zu starten.
           </p>
 
           {isLoading && (
@@ -70,7 +87,7 @@ export default function FloorplanPage({ onBackToLanding, onSelectBox }: Props) {
 
           {!isLoading && !errorMsg && boxes.length === 0 && (
             <p className="text-sm text-slate-500">
-              Aktuell sind für den ausgewählten Zeitraum keine Boxen verfügbar.
+              Aktuell sind keine Boxen verfügbar.
             </p>
           )}
 
@@ -79,7 +96,7 @@ export default function FloorplanPage({ onBackToLanding, onSelectBox }: Props) {
               <button
                 key={box.id}
                 type="button"
-                onClick={() => onSelectBox(box.id)}
+                onClick={() => handleSelectBox(box.id)}
                 className="aspect-[4/3] rounded-xl bg-slate-100 hover:bg-sky-100 border border-slate-200 hover:border-sky-300 text-xs sm:text-sm font-medium text-slate-700 flex flex-col items-center justify-center hover:scale-105 transition-transform duration-150"
               >
                 <span className="font-semibold">{box.name}</span>
@@ -87,7 +104,7 @@ export default function FloorplanPage({ onBackToLanding, onSelectBox }: Props) {
                   {box.size_m2} m²
                 </span>
                 <span className="mt-1 text-[11px] text-slate-600">
-                  ab {box.price_for_period.toFixed(2)} €
+                  ab {box.price_for_period?.toFixed(2) ?? "0.00"} €
                 </span>
               </button>
             ))}
