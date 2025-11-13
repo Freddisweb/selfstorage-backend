@@ -1,12 +1,14 @@
 // src/components/LoginModal.tsx
 import { useState } from "react";
-import { API_BASE_URL } from "../api";
 
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
   onLoginSuccess: (email: string) => void;
 }
+
+// API-Basis-URL aus Vite-Env
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string | undefined;
 
 const LoginModal: React.FC<LoginModalProps> = ({
   isOpen,
@@ -25,6 +27,14 @@ const LoginModal: React.FC<LoginModalProps> = ({
     e.preventDefault();
     setLoginError(null);
     setLoginMessage(null);
+
+    if (!API_BASE_URL) {
+      setLoginError(
+        "Konfigurationsfehler: API-URL nicht gesetzt. Bitte den Betreiber kontaktieren."
+      );
+      return;
+    }
+
     setIsLoggingIn(true);
 
     try {
@@ -48,7 +58,13 @@ const LoginModal: React.FC<LoginModalProps> = ({
       }
 
       const data = await res.json();
-      const token = data.access_token as string;
+      const token = data.access_token as string | undefined;
+
+      if (!token) {
+        throw new Error("Login erfolgreich, aber kein Token erhalten.");
+      }
+
+      // Token im LocalStorage speichern → verwendet vom Rest des Frontends
       localStorage.setItem("access_token", token);
 
       setLoginMessage("Login erfolgreich.");
