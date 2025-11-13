@@ -27,21 +27,18 @@ const LoginModal: React.FC<LoginModalProps> = ({
     e.preventDefault();
     setLoginError(null);
     setLoginMessage(null);
-
-    if (!API_BASE_URL) {
-      setLoginError(
-        "Konfigurationsfehler: API-URL nicht gesetzt. Bitte den Betreiber kontaktieren."
-      );
-      return;
-    }
-
     setIsLoggingIn(true);
 
     try {
+      if (!API_BASE_URL) {
+        throw new Error("API_BASE_URL ist nicht gesetzt.");
+      }
+
       const body = new URLSearchParams();
       body.append("username", email);
       body.append("password", password);
 
+      // 1) Login beim Backend
       const res = await fetch(`${API_BASE_URL}/auth/login`, {
         method: "POST",
         headers: {
@@ -64,14 +61,35 @@ const LoginModal: React.FC<LoginModalProps> = ({
         throw new Error("Login erfolgreich, aber kein Token erhalten.");
       }
 
-      // Token im LocalStorage speichern → verwendet vom Rest des Frontends
+      // Token im LocalStorage speichern
       localStorage.setItem("access_token", token);
+
+      // 2) Direkt danach: /auth/me aufrufen, um User-Daten zu holen
+      let backendEmail = email;
+      try {
+        const meRes = await fetch(`${API_BASE_URL}/auth/me`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        if (meRes.ok) {
+          const meData = await meRes.json();
+          if (meData.email) {
+            backendEmail = meData.email;
+          }
+        } else {
+          console.warn("auth/me fehlgeschlagen:", meRes.status);
+        }
+      } catch (err) {
+        console.warn("Fehler beim Aufruf von /auth/me:", err);
+      }
 
       setLoginMessage("Login erfolgreich.");
       setPassword("");
 
-      // App informieren → User-Email in App-Status übernehmen
-      onLoginSuccess(email);
+      // App informieren → echte Mail aus Backend durchgeben
+      onLoginSuccess(backendEmail);
 
       // Modal nach kurzem Feedback schließen
       setTimeout(() => {
@@ -79,6 +97,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
         onClose();
       }, 600);
     } catch (err: any) {
+      console.error("Login-Fehler:", err);
       setLoginError(
         err?.message ?? "Unbekannter Fehler beim Login. Bitte erneut versuchen."
       );
