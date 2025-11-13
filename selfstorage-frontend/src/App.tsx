@@ -1,8 +1,14 @@
 // src/App.tsx
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route, useNavigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import FloorplanPage from "./pages/FloorplanPage";
+import BookingPage from "./pages/BookingPage";
 import LoginModal from "./components/LoginModal";
 
 interface AuthUser {
@@ -32,7 +38,7 @@ function AppShell() {
       setIsLoginOpen(true);
       return;
     }
-    alert(`Hier würden wir jetzt die Buchung für Box ${boxId} starten.`);
+    navigate(`/booking/${boxId}`);
   };
 
   return (
@@ -59,6 +65,7 @@ function AppShell() {
             />
           }
         />
+        <Route path="/booking/:boxId" element={<BookingPage />} />
       </Routes>
 
       <LoginModal

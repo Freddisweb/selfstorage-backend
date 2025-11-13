@@ -1,20 +1,23 @@
 {
   "compilerOptions": {
     "target": "ESNext",
+    "useDefineForClassFields": true,
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
-    "jsx": "react-jsx",
-
-    "module": "ESNext",
-    "moduleResolution": "node",
-
-    "strict": true,
+    "allowJs": false,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "noEmit": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
 
-    "types": ["vite/client", "react", "react-dom"]
+    "module": "ESNext",
+    "moduleResolution": "Node",          // <— NICHT „bundler“
+    "resolveJsonModule": true,
+
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "types": ["vite/client"]             // <— damit import.meta.env & Asset-Imports bekannt sind
   },
-  "include": ["src", "src/types"]
+  "include": ["src"]
 }
