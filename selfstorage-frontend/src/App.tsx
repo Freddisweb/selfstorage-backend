@@ -1,4 +1,4 @@
-// src/App.tsx
+console.log("VITE_API_BASE_URL =", import.meta.env.VITE_API_BASE_URL);
 import { useState } from "react";
 import {
   BrowserRouter as Router,
@@ -6,10 +6,11 @@ import {
   Route,
   useNavigate,
 } from "react-router-dom";
+
 import LandingPage from "./pages/LandingPage";
 import FloorplanPage from "./pages/FloorplanPage";
-import LoginModal from "./components/LoginModal";
 import BookingPage from "./pages/BookingPage";
+import LoginModal from "./components/LoginModal";
 
 interface AuthUser {
   email: string;
@@ -19,8 +20,10 @@ function AppShell() {
   const [authUser, setAuthUser] = useState<AuthUser | null>(null);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
 
-  const isLoggedIn = !!authUser || !!localStorage.getItem("access_token");
   const navigate = useNavigate();
+
+  // Eingeloggt = entweder User im State ODER Token im LocalStorage
+  const isLoggedIn = !!authUser || !!localStorage.getItem("access_token");
 
   const handleLogout = () => {
     localStorage.removeItem("access_token");
@@ -32,7 +35,16 @@ function AppShell() {
     setIsLoginOpen(false);
   };
 
-  const goToFloorplan = () => navigate("/floorplan");
+  // Wenn Box geklickt wird:
+  const handleSelectBox = (boxId: string) => {
+    if (!isLoggedIn) {
+      // Kein Login → LoginModal öffnen
+      setIsLoginOpen(true);
+      return;
+    }
+    // Eingeloggt → zur Buchungsseite
+    navigate(`/booking/${boxId}`);
+  };
 
   return (
     <>
@@ -45,20 +57,19 @@ function AppShell() {
               userEmail={authUser?.email ?? null}
               onOpenLogin={() => setIsLoginOpen(true)}
               onLogout={handleLogout}
-              onGoToFloorplan={goToFloorplan}
+              onGoToFloorplan={() => navigate("/floorplan")}
             />
           }
         />
-
         <Route
           path="/floorplan"
           element={
             <FloorplanPage
               onBackToLanding={() => navigate("/")}
+              onSelectBox={handleSelectBox}
             />
           }
         />
-
         <Route path="/booking/:boxId" element={<BookingPage />} />
       </Routes>
 

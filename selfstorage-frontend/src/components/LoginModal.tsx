@@ -1,4 +1,3 @@
-// src/components/LoginModal.tsx
 import { useState } from "react";
 
 interface LoginModalProps {
@@ -7,7 +6,7 @@ interface LoginModalProps {
   onLoginSuccess: (email: string) => void;
 }
 
-// API-Basis-URL aus Vite-Env
+// Basis-URL aus Vite-Env
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string | undefined;
 
 const LoginModal: React.FC<LoginModalProps> = ({
@@ -31,7 +30,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
 
     try {
       if (!API_BASE_URL) {
-        throw new Error("API_BASE_URL ist nicht gesetzt.");
+        throw new Error("API-Basis-URL ist nicht gesetzt.");
       }
 
       const body = new URLSearchParams();
@@ -61,10 +60,9 @@ const LoginModal: React.FC<LoginModalProps> = ({
         throw new Error("Login erfolgreich, aber kein Token erhalten.");
       }
 
-      // Token im LocalStorage speichern
       localStorage.setItem("access_token", token);
 
-      // 2) Direkt danach: /auth/me aufrufen, um User-Daten zu holen
+      // 2) /auth/me, um die echte Mail aus dem Backend zu holen
       let backendEmail = email;
       try {
         const meRes = await fetch(`${API_BASE_URL}/auth/me`, {
@@ -72,7 +70,6 @@ const LoginModal: React.FC<LoginModalProps> = ({
             Authorization: `Bearer ${token}`,
           },
         });
-
         if (meRes.ok) {
           const meData = await meRes.json();
           if (meData.email) {
@@ -88,10 +85,9 @@ const LoginModal: React.FC<LoginModalProps> = ({
       setLoginMessage("Login erfolgreich.");
       setPassword("");
 
-      // App informieren → echte Mail aus Backend durchgeben
+      // App informieren
       onLoginSuccess(backendEmail);
 
-      // Modal nach kurzem Feedback schließen
       setTimeout(() => {
         setLoginMessage(null);
         onClose();
