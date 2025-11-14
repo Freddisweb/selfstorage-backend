@@ -1,21 +1,26 @@
+// src/pages/LandingPage.tsx
 import Button from "../components/ui/Button";
 import Card from "../components/ui/Card";
 import storageImage from "../assets/storage.jpg";
 
 type Props = {
   isLoggedIn: boolean;
-  userEmail?: string | null;
+  isAdmin: boolean;
+  userEmail: string | null;
   onOpenLogin: () => void;
   onLogout: () => void;
   onGoToFloorplan: () => void;
+  onGoToAdmin?: () => void;
 };
 
 export default function LandingPage({
   isLoggedIn,
+  isAdmin,
   userEmail,
   onOpenLogin,
   onLogout,
   onGoToFloorplan,
+  onGoToAdmin,
 }: Props) {
   return (
     <div className="min-h-screen w-full bg-[#f3f3f0] flex flex-col">
@@ -25,13 +30,24 @@ export default function LandingPage({
           SPACEONE
         </h1>
 
-        {/* Login oben rechts */}
+        {/* Rechts oben: Login / User + optional Admin */}
         <div className="absolute right-6 top-6 flex items-center gap-3">
           {isLoggedIn && userEmail && (
             <span className="hidden sm:inline text-xs text-slate-600">
               Eingeloggt als{" "}
               <span className="font-medium text-slate-900">{userEmail}</span>
             </span>
+          )}
+
+          {isAdmin && onGoToAdmin && (
+            <Button
+              onClick={onGoToAdmin}
+              variant="primary"
+              size="sm"
+              className="bg-slate-800 hover:bg-slate-900"
+            >
+              Admin
+            </Button>
           )}
 
           {isLoggedIn ? (
@@ -56,20 +72,20 @@ export default function LandingPage({
         </div>
       </header>
 
-      {/* Inhalt mit Background + Button */}
+      {/* Inhalt mit Bild + Button */}
       <main className="flex-1 flex flex-col items-center px-4 pb-14">
-        <Card className="relative isolate w-full max-w-5xl overflow-hidden rounded-2xl shadow-2xl">
-          {/* Hintergrundbild */}
-          <div
-            className="pointer-events-none absolute inset-0 bg-center bg-cover z-0"
-            style={{ backgroundImage: `url(${storageImage})` }}
+        <Card className="relative w-full max-w-5xl overflow-hidden bg-black rounded-2xl shadow-2xl">
+          <img
+            src={storageImage}
+            alt="Moderner Selfstorage-Gang"
+            className="block w-full h-[420px] sm:h-[520px] object-cover"
           />
 
-          {/* Abdunkelung */}
-          <div className="pointer-events-none absolute inset-0 bg-black/25 z-10" />
+          {/* Dunkles Overlay */}
+          <div className="absolute inset-0 bg-black/25" />
 
-          {/* Button zentriert */}
-          <div className="relative z-50 flex items-center justify-center h-[420px] sm:h-[520px]">
+          {/* Großer Call-to-Action Button */}
+          <div className="absolute inset-0 flex items-center justify-center">
             <button
               type="button"
               onClick={onGoToFloorplan}

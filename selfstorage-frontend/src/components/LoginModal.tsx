@@ -1,13 +1,12 @@
+// src/components/LoginModal.tsx
 import { useState } from "react";
+import { API_BASE_URL, getMe } from "../api";
 
 interface LoginModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onLoginSuccess: (email: string) => void;
+  onLoginSuccess: (user: { email: string; role: "admin" | "customer" }) => void;
 }
-
-// Basis-URL aus Vite-Env
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string | undefined;
 
 const LoginModal: React.FC<LoginModalProps> = ({
   isOpen,
@@ -30,7 +29,9 @@ const LoginModal: React.FC<LoginModalProps> = ({
 
     try {
       if (!API_BASE_URL) {
-        throw new Error("API-Basis-URL ist nicht gesetzt.");
+        throw new Error(
+          "API-Basis-URL ist nicht konfiguriert (VITE_API_BASE_URL)."
+        );
       }
 
       const body = new URLSearchParams();
@@ -60,34 +61,30 @@ const LoginModal: React.FC<LoginModalProps> = ({
         throw new Error("Login erfolgreich, aber kein Token erhalten.");
       }
 
+      // Token im LocalStorage speichern
       localStorage.setItem("access_token", token);
 
-      // 2) /auth/me, um die echte Mail aus dem Backend zu holen
-      let backendEmail = email;
+      // 2) Userdaten über /auth/me holen
+      let finalEmail = email;
+      let role: "admin" | "customer" = "customer";
+
       try {
-        const meRes = await fetch(`${API_BASE_URL}/auth/me`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        if (meRes.ok) {
-          const meData = await meRes.json();
-          if (meData.email) {
-            backendEmail = meData.email;
-          }
-        } else {
-          console.warn("auth/me fehlgeschlagen:", meRes.status);
+        const me = await getMe();
+        if (me.email) {
+          finalEmail = me.email;
         }
-      } catch (err) {
-        console.warn("Fehler beim Aufruf von /auth/me:", err);
+        role = me.is_admin ? "admin" : "customer";
+      } catch (e) {
+        console.warn("auth/me fehlgeschlagen:", e);
       }
 
       setLoginMessage("Login erfolgreich.");
       setPassword("");
 
-      // App informieren
-      onLoginSuccess(backendEmail);
+      // App informieren → Email + Rolle weitergeben
+      onLoginSuccess({ email: finalEmail, role });
 
+      // Modal nach kurzem Feedback schließen
       setTimeout(() => {
         setLoginMessage(null);
         onClose();
@@ -105,9 +102,7 @@ const LoginModal: React.FC<LoginModalProps> = ({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
       <div className="w-full max-w-sm rounded-2xl bg-white shadow-xl p-6">
-        <h2 className="text-lg font-semibold text-slate-900 mb-2">
-          Einloggen
-        </h2>
+        <h2 className="text-lg font-semibold text-slate-900 mb-2">Einloggen</h2>
         <p className="text-xs text-slate-500 mb-4">
           Bitte melde dich an, um deine Buchung abzuschließen.
         </p>

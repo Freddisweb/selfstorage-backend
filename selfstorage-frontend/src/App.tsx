@@ -1,7 +1,7 @@
 // src/App.tsx
 console.log("VITE_API_BASE_URL =", import.meta.env.VITE_API_BASE_URL);
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -14,7 +14,7 @@ import FloorplanPage from "./pages/FloorplanPage";
 import BookingPage from "./pages/BookingPage";
 import AdminDashboardPage from "./pages/AdminDashboardPage";
 import LoginModal from "./components/LoginModal";
-import type { BoxPublic } from "./api";
+import { getMe } from "./api";
 
 interface AuthUser {
   email: string;
@@ -30,27 +30,59 @@ function AppShell() {
   const isLoggedIn = !!authUser || !!localStorage.getItem("access_token");
   const isAdmin = authUser?.role === "admin";
 
+  // Beim Laden versuchen, /auth/me abzurufen
+  useEffect(() => {
+    const token = localStorage.getItem("access_token");
+    if (!token) return;
+
+    (async () => {
+      try {
+        const me = await getMe();
+        setAuthUser({
+          email: me.email,
+          role: me.is_admin ? "admin" : "customer",
+        });
+      } catch (err) {
+        console.warn("Konnte /auth/me beim Start nicht laden:", err);
+        localStorage.removeItem("access_token");
+        setAuthUser(null);
+      }
+    })();
+  }, []);
+
   const handleLogout = () => {
     localStorage.removeItem("access_token");
     setAuthUser(null);
+    navigate("/");
   };
 
-  const handleLoginSuccess = (user: { email: string; role: "admin" | "customer" }) => {
-    setAuthUser(user);
-    setIsLoginOpen(false);
+  const handleLoginSuccess = async () => {
+    try {
+      const me = await getMe();
+      setAuthUser({
+        email: me.email,
+        role: me.is_admin ? "admin" : "customer",
+      });
 
-    // Admins direkt ins Dashboard
-    if (user.role === "admin") {
-      navigate("/admin");
+      if (me.is_admin) {
+        navigate("/admin");
+      }
+    } catch (err) {
+      console.error("Fehler bei getMe nach Login:", err);
+    } finally {
+      setIsLoginOpen(false);
     }
   };
 
-  const handleSelectBox = (box: BoxPublic) => {
+  const handleSelectBox = (box: import("./api").BoxPublic) => {
     if (!isLoggedIn) {
       setIsLoginOpen(true);
       return;
     }
-    navigate(`/booking/${box.id}`, { state: { box } });
+
+    navigate(`/booking/${box.id}`, {
+      state: { box },
+    });
   };
 
   return (
@@ -66,11 +98,9 @@ function AppShell() {
               onOpenLogin={() => setIsLoginOpen(true)}
               onLogout={handleLogout}
               onGoToFloorplan={() => navigate("/floorplan")}
-              onGoToAdmin={isAdmin ? () => navigate("/admin") : undefined}
             />
           }
         />
-
         <Route
           path="/floorplan"
           element={
@@ -80,29 +110,8 @@ function AppShell() {
             />
           }
         />
-
         <Route path="/booking/:boxId" element={<BookingPage />} />
-
-        <Route
-          path="/admin"
-          element={
-            isAdmin ? (
-              <AdminDashboardPage
-                onBackToLanding={() => navigate("/")}
-              />
-            ) : (
-              // Falls jemand /admin direkt öffnet ohne Admin-Rechte
-              <LandingPage
-                isLoggedIn={isLoggedIn}
-                isAdmin={false}
-                userEmail={authUser?.email ?? null}
-                onOpenLogin={() => setIsLoginOpen(true)}
-                onLogout={handleLogout}
-                onGoToFloorplan={() => navigate("/floorplan")}
-              />
-            )
-          }
-        />
+        <Route path="/admin" element={<AdminDashboardPage />} />
       </Routes>
 
       <LoginModal

@@ -1,12 +1,11 @@
 // src/pages/FloorplanPage.tsx
 import { useEffect, useState } from "react";
-import Button from "../components/ui/Button";
 import Card from "../components/ui/Card";
-import { getAvailableBoxes, BoxPublic } from "../api";
+import { getAvailableBoxes, type BoxPublic } from "../api";
 
 type Props = {
   onBackToLanding: () => void;
-  onSelectBox: (boxId: string) => void;
+  onSelectBox: (box: BoxPublic) => void; // <-- ganze Box
 };
 
 export default function FloorplanPage({
@@ -23,7 +22,6 @@ export default function FloorplanPage({
         setIsLoading(true);
         setErrorMsg(null);
 
-        // Zeitraum: Start jetzt, Dauer 60 Min – kann man später parametrisierbar machen
         const data = await getAvailableBoxes({
           startInMinutes: 0,
           durationMinutes: 60,
@@ -86,7 +84,7 @@ export default function FloorplanPage({
               <button
                 key={box.id}
                 type="button"
-                onClick={() => onSelectBox(box.id)}
+                onClick={() => onSelectBox(box)}
                 className="aspect-[4/3] rounded-xl bg-slate-100 hover:bg-sky-100 border border-slate-200 hover:border-sky-300 text-xs sm:text-sm font-medium text-slate-700 flex flex-col items-center justify-center hover:scale-105 transition-transform duration-150"
               >
                 <span className="font-semibold">{box.name}</span>
