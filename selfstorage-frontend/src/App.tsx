@@ -1,4 +1,6 @@
+// src/App.tsx
 console.log("VITE_API_BASE_URL =", import.meta.env.VITE_API_BASE_URL);
+
 import { useState } from "react";
 import {
   BrowserRouter as Router,
@@ -10,10 +12,13 @@ import {
 import LandingPage from "./pages/LandingPage";
 import FloorplanPage from "./pages/FloorplanPage";
 import BookingPage from "./pages/BookingPage";
+import AdminDashboardPage from "./pages/AdminDashboardPage";
 import LoginModal from "./components/LoginModal";
+import type { BoxPublic } from "./api";
 
 interface AuthUser {
   email: string;
+  role: "admin" | "customer";
 }
 
 function AppShell() {
@@ -22,28 +27,30 @@ function AppShell() {
 
   const navigate = useNavigate();
 
-  // Eingeloggt = entweder User im State ODER Token im LocalStorage
   const isLoggedIn = !!authUser || !!localStorage.getItem("access_token");
+  const isAdmin = authUser?.role === "admin";
 
   const handleLogout = () => {
     localStorage.removeItem("access_token");
     setAuthUser(null);
   };
 
-  const handleLoginSuccess = (email: string) => {
-    setAuthUser({ email });
+  const handleLoginSuccess = (user: { email: string; role: "admin" | "customer" }) => {
+    setAuthUser(user);
     setIsLoginOpen(false);
+
+    // Admins direkt ins Dashboard
+    if (user.role === "admin") {
+      navigate("/admin");
+    }
   };
 
-  // Wenn Box geklickt wird:
-  const handleSelectBox = (boxId: string) => {
+  const handleSelectBox = (box: BoxPublic) => {
     if (!isLoggedIn) {
-      // Kein Login → LoginModal öffnen
       setIsLoginOpen(true);
       return;
     }
-    // Eingeloggt → zur Buchungsseite
-    navigate(`/booking/${boxId}`);
+    navigate(`/booking/${box.id}`, { state: { box } });
   };
 
   return (
@@ -54,13 +61,16 @@ function AppShell() {
           element={
             <LandingPage
               isLoggedIn={isLoggedIn}
+              isAdmin={isAdmin}
               userEmail={authUser?.email ?? null}
               onOpenLogin={() => setIsLoginOpen(true)}
               onLogout={handleLogout}
               onGoToFloorplan={() => navigate("/floorplan")}
+              onGoToAdmin={isAdmin ? () => navigate("/admin") : undefined}
             />
           }
         />
+
         <Route
           path="/floorplan"
           element={
@@ -70,7 +80,29 @@ function AppShell() {
             />
           }
         />
+
         <Route path="/booking/:boxId" element={<BookingPage />} />
+
+        <Route
+          path="/admin"
+          element={
+            isAdmin ? (
+              <AdminDashboardPage
+                onBackToLanding={() => navigate("/")}
+              />
+            ) : (
+              // Falls jemand /admin direkt öffnet ohne Admin-Rechte
+              <LandingPage
+                isLoggedIn={isLoggedIn}
+                isAdmin={false}
+                userEmail={authUser?.email ?? null}
+                onOpenLogin={() => setIsLoginOpen(true)}
+                onLogout={handleLogout}
+                onGoToFloorplan={() => navigate("/floorplan")}
+              />
+            )
+          }
+        />
       </Routes>
 
       <LoginModal
